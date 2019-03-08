@@ -9,3 +9,6 @@ function startup() {
 		getPort();
 	},false);
 }
+function loadW3HTML() {
+	w3.includeHTML();
+}
