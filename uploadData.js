@@ -8,7 +8,7 @@ function startDataUpload(){
 	//get the checkbox values
 	var checkString = " ";
 	//loop for all boxes
-	for (var i = 1;i < 5;i++){
+	for (var i = 1; i < 5;i++){
 		if (document.getElementById("check"+i).checked == true){
 			checkString = checkString + document.getElementById("check"+i).value+","
 		}
@@ -42,12 +42,14 @@ var client;
 function processData(postString){
 	//make a new request using the client variable
 	client = new XMLHttpRequest();
+	postString = postString + "&port_id=" +httpPortNumber;
+	var url ='http://developer.cege.ucl.ac.uk:'+httpPortNumber +"/uploadData";
 	//use the server to bounce the data back to us using /reflectData
-	client.open('POST','http://developer.cege.ucl.ac.uk:/reflectData',true);
+	client.open('POST',url, true);
 	//inform the server of the type of data
 	client.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	//call the function to upload the data when the client is ready
-	client.onreadystatechange = dataUpload;
+	client.onreadystatechange = dataUploaded;
 	//send the post String
 	client.send(postString);
 }
